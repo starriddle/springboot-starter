@@ -9,3 +9,7 @@
 - 20181201 分离 framework 模块
 
     分离 framework 模块，独立成项
+
+- 20181209 迁移 spring-boot 模块
+
+    分离 spring-boot 模块，至 springboot 分支，以便迁移至 SpringBoot-Starter 项目
