@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.7.RELEASE</version>
+    </parent>
+
+    <groupId>com.starriddle.starter.springboot.admin</groupId>
+    <artifactId>admin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>SpringBoot::Admin</name>
+    <description>Demo projects for Admin</description>
+
+    <modules>
+        <module>admin-server</module>
+        <module>admin-client</module>
+    </modules>
+
+    <properties>
+        <!--
+         SpringBoot Admin 与 SpringBoot 版本号要保持一致：a.b，如
+         1.5 SpringBoot Admin 依赖 1.5 SpringBoot
+         2.0 SpringBoot Admin 依赖 2.0 SpringBoot：2.0 以后 UI 使用Vue重写
+         2.1 SpringBoot Admin 依赖 2.1 SpringBoot：2.1 以后 client detail 增加 spring bean 查看
+         -->
+        <spring-boot-admin.version>2.0.4</spring-boot-admin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>

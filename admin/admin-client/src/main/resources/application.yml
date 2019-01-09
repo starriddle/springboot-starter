@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: admin-client
+  boot:
+    admin:
+      client:
+        url: http://localhost:11021
+        instance:
+          prefer-ip: true # 使用ip，默认为hostname
+
+server:
+  port: 11022
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
