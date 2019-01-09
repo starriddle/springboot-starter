@@ -4,18 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.6.RELEASE</version>
+        <groupId>com.starriddle.starter.springboot.feign</groupId>
+        <artifactId>feign</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.starriddle.starter.springboot.feign</groupId>
     <artifactId>feign-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>SpringBoot::Feign::Server</name>
-    <description>Demo project of Feign Server for Spring Boot</description>
+    <description>Demo project of Feign Server</description>
 
     <dependencies>
         <dependency>
