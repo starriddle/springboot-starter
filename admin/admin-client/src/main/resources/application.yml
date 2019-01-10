@@ -7,6 +7,8 @@ spring:
         url: http://localhost:11021
         instance:
           prefer-ip: true # 使用ip，默认为hostname
+        username: "admin"
+        password: "admin"
 
 server:
   port: 11022
