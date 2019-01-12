@@ -4,9 +4,15 @@ spring:
   boot:
     admin:
       client:
+        # 设置 admin server 的 url
         url: http://localhost:11021
+        # client 在 server 上注册的应用信息
         instance:
-          prefer-ip: true # 使用ip，默认为hostname
+          # 使用ip，默认为hostname
+          prefer-ip: true
+          # 注册到 admin server 的 应用名称，默认 spring.application.name
+          name: client-server
+        # 如 admin server 开启权限控制，需要使用用户名密码进行连接注册
         username: "admin"
         password: "admin"
 
