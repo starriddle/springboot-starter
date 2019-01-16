@@ -13,6 +13,7 @@
 
     <modules>
         <module>demo</module>
+        <module>swagger</module>
         <module>feign</module>
         <module>admin</module>
     </modules>
