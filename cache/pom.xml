@@ -6,16 +6,20 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.7.RELEASE</version>
+        <version>2.1.3.RELEASE</version>
     </parent>
 
     <groupId>com.starriddle.starter.springboot.cache</groupId>
     <artifactId>cache</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>SpringBoot::Cache</name>
     <description>Demo projects of Cache</description>
+
+    <properties>
+        <java.version>11</java.version>
+    </properties>
 
     <dependencies>
         <dependency>
