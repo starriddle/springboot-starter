@@ -17,7 +17,7 @@ spring:
         password: "admin"
 
 server:
-  port: 11022
+  port: 11001
 management:
   endpoints:
     web:
