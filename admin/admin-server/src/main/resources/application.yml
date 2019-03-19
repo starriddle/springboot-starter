@@ -4,16 +4,18 @@ server:
 spring:
   application:
     name: admin-server
-  mail:
-    host: smtp.exmail.qq.com
-    username: #username
-    password: #password
-  boot:
-    admin:
-      notify:
-        mail:
-          to: #接受方邮件
-          from: #发送方邮件，与邮件服务配置保持一致
+  # 邮件通知模块
+#  mail:
+#    host: smtp.exmail.qq.com
+#    username: #username
+#    password: #password
+#  boot:
+#    admin:
+#      notify:
+#        mail:
+#          to: #接受方邮件
+#          from: #发送方邮件，与邮件服务配置保持一致
+  # 鉴权模块
   security:
     user:
       name: "admin"

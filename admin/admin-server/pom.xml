@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.starriddle.starter.springboot.admin</groupId>
         <artifactId>admin</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>admin-server</artifactId>
@@ -16,18 +16,25 @@
     <description>Demo project of Admin Server</description>
 
     <dependencies>
+        <!-- Spring Boot Web 起步依赖，security 模块需要 javax.servlet.Filter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Spring Boot Admin Server 依赖，包含 actuator + webflux 模块 -->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
         </dependency>
+
+        <!-- Spring Boot Security 安全 依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <!-- Spring Boot Mail 邮件通知 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>

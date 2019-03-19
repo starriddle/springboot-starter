@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.starriddle.starter.springboot.admin</groupId>
         <artifactId>admin</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>admin-client</artifactId>
@@ -16,10 +16,13 @@
     <description>Demo project of Admin Client</description>
 
     <dependencies>
+        <!-- Spring Boot Web 起步依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Spring Boot Admin Client 依赖，包含 actuator 模块 -->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
