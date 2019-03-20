@@ -26,3 +26,15 @@ management:
   endpoint:
     health:
       show-details: always
+  info:
+    git:
+      # /actuator/info 端点 显示git版本信息的模式
+      # 默认:simple，只显示git核心设置信息，branch/commit.id/commit.time
+      # full，显示git所有有效信息，包括自定义信息
+      mode: full
+
+# 可自定义actuator/info下的信息
+info:
+  app:
+    name: admin-client
+    version: 2019.03.19-SNAPSHOT

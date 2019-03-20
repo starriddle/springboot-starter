@@ -29,4 +29,181 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <finalName>${project.artifactId}-${project.version}-${git.commit.id.abbrev}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.6</version>
+                <executions>
+                    <execution>
+                        <!-- 自定义id，要求唯一性；默认值:default -->
+                        <!-- 插件必须有且只能有一个id=default的execution -->
+                        <!-- 多个execution 最多只能有一个不定义id，否则error：出现多个default，不符合唯一性要求 -->
+                        <!-- 所有execution都自定义id，插件会增加一个execution：id=default的revision -->
+                        <!--<id>get-git-info</id>-->
+                        <goals>
+                            <!-- 获取 git commit 信息 -->
+                            <goal>revision</goal>
+                        </goals>
+                        <!-- 执行时期；默认:initialize 初始阶段 -->
+                        <phase>initialize</phase>
+                    </execution>
+                    <execution>
+                        <id>validate-git-info</id>
+                        <goals>
+                            <!-- 校验 git commit 信息 -->
+                            <goal>validateRevision</goal>
+                        </goals>
+                        <!-- 执行时期；默认:verify 校验阶段 -->
+                        <phase>verify</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 设置 git.commit.id.abbrev 的最短长度；默认:7，范围[2，40] -->
+                    <!-- abbrev截取commitId前几位字符，作为commitId的短版本号，具有唯一性 -->
+                    <!-- 当存在前几位字符相同的commitId时，abbrev长度大于指定长度，以保证其唯一性 -->
+                    <abbrevLength>8</abbrevLength>
+
+                    <!-- commitId字段名称生成模式：flat/full，默认:flat(除了full，其他非标准值一律默认为flat) -->
+                    <!-- flat：字段名称使用 git.commit.id，传统模式，向后兼容，json转换存在问题（包括无法使用yaml格式） -->
+                    <!-- full：字段名称使用 git.commit.id.full，全名模式，不向后兼容，json转换没问题 -->
+                    <commitIdGenerationMode>full</commitIdGenerationMode>
+
+                    <!-- 输出日期格式;默认值:yyyy-MM-dd 'T' HH:mm:ss z -->
+                    <!-- 如要与 spring-boot-actuator 模块 结合，此处请使用默认格式。后者读取时作为秒数或默认格式进行解析 -->
+                    <!--<dateFormat>yyyyMMddHHmmss</dateFormat>-->
+
+                    <!-- 日期时区设置；默认值:本地系统时区 -->
+                    <!--<dateFormatTimeZone>GMT+8</dateFormatTimeZone>-->
+
+                    <!-- ".git"文件路径，仓库根目录;默认值:${project.basedir}/.git; -->
+                    <!--<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>-->
+
+                    <!-- 设置生成"git.properties"的参考commit，可以是commit/abbrev/branch/tag；默认值:HEAD -->
+                    <!--<evaluateOnCommit>HEAD</evaluateOnCommit>-->
+
+                    <!-- 设置 生成"git.properties"时 隐藏的字段，避免泄漏 -->
+                    <!--<excludeProperties></excludeProperties>-->
+
+                    <!-- 设置 生成"git.properties"时 写入的字段，其他字段不写入，该规则会被exclideProperties覆盖 -->
+                    <!--<includeOnlyProperties></includeOnlyProperties>-->
+
+                    <!-- 设置 生成"git.properties"时 对所有字段或指定字段的值进行替换 -->
+                    <!--<replacementProperties></replacementProperties>-->
+
+                    <!--".git"文件夹未找到时,构建是否失败;默认值:true;-->
+                    <!-- 若设置true,则构建失败;若设置false,则跳过执行该目标，继续构建 -->
+                    <!--<failOnNoGitDirectory>true</failOnNoGitDirectory>-->
+
+                    <!-- 当无法获取git仓库信息时，构建是否失败；默认值:true -->
+                    <!-- 若设置true，则构建失败；若设置false,则跳过执行该目标，继续构建 -->
+                    <!-- 一般在某些 CI 构建的情景(CI 服务器对git仓库进行特殊操作)下可能有用 -->
+                    <!--<failOnUnableToExtractRepoInfo>true</failOnUnableToExtractRepoInfo>-->
+
+                    <!-- 生成"git.properties"时 内部属性保存格式：properties/json；默认值:properties -->
+                    <!--<format>properties</format>-->
+
+                    <!--是否生成"git.properties"文件；默认值:false, 仅将这些属性添加到 maven project properties 中;-->
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+
+                    <!--指定"git.properties"文件的存放路径(相对于${project.basedir}的一个路径);-->
+                    <!--指定generateGitPropertiesFile=true才有效；-->
+                    <!-- ${project.build.outputDirectory}/git.properties -->
+                    <!--<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>-->
+
+                    <!-- git描述配置: 此处commitId添加前缀g，说明是个commitId，而不是objectId，此为git默认行为 -->
+                    <!-- git.commit.id.describe=tag-num-commitId[-dirty]；git.commit.id.describe-short=tag-num[-dirty] -->
+                    <gitDescribe>
+                        <!-- 是否禁止生成描述属性 git.commit.id.describe[-short]；默认值:fasle -->
+                        <!--<skip>false</skip>-->
+
+                        <!-- 是否始终显示commitId的唯一性端版本号；默认值:true，禁用无意义 -->
+                        <!--<always>false</always>-->
+
+                        <!-- commitId显式字符最短长度，范围[0,40]；默认值:7；具有唯一性，规则同abbrevLength -->
+                        <!-- 特殊值 0："num-commitId"全部隐藏，仅剩tag[-dirty]；1：commitId完整显示，等同40 -->
+                        <abbrev>7</abbrev>
+
+                        <!--构建触发时,代码有修改时(即"dirty state"),添加指定后缀;默认值:"-dirty";-->
+                        <dirty>-changed</dirty>
+
+                        <!-- 使用tag进行描述时，应用正则表达式筛选指定tag；默认值:"*" 所有tag -->
+                        <!--<match>*</match>-->
+
+                        <!-- 使用tag进行描述，自动寻找符合筛选条件的最近的tag；默认值:false -->
+                        <!-- false: 不使用tag, describe/describe-short 均为 commitId[-dirty]-->
+                        <!-- true：使用tag，describe=tag-num-commitId[-dirty]，describe-short 没有commitId -->
+                        <!-- 当git不存在tag时，该设置无效，默认为false -->
+                        <tags>true</tags>
+
+                        <!-- 是否强制打印 "tag-commits_from_tag-commitId-dirty" 长格式 -->
+                        <!-- 即使当前正处于某个tag，也打印距离 0，即 "tag-0[-commitId][-dirty]" -->
+                        <!-- 默认值:false 当前正处于某个tag时，不显示距离和commitId -->
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+
+                    <!--是否将"git.properties"配置内容注入到所有reactor项目; 默认值:false 仅限本项目使用-->
+                    <!--<injectAllReactorProjects>true</injectAllReactorProjects>-->
+
+                    <!-- 自定义 reactor 项目列表；默认值:${reactorProjects} -->
+                    <!--<reactorProjects></reactorProjects>-->
+
+                    <!-- 自定义所有属性名称的前缀；默认值:git -->
+                    <!--<prefix>git</prefix>-->
+
+                    <!-- 自定义 maven project；默认值:${project} 当前mvaven项目 -->
+                    <!--<project></project>-->
+
+                    <!-- 执行多模块项目的构建时，是否只运行本任务一次；默认值:false -->
+                    <!-- true：当项目拥有多个git 仓库时 可能会出问题；只会 -->
+                    <!-- true：当设置生成"git.properties"时，只会在执行build的模块下生成该文件 -->
+                    <!--<runOnlyOnce>false</runOnlyOnce>-->
+
+                    <!-- The Maven Session Object. -->
+                    <!--<session></session>-->
+
+                    <!-- 是否跳过本插件的执行；默认值:false -->
+                    <!-- 在properties中设置maven.buildHelperMojo.skip属性可修改skip默认值 -->
+                    <!-- 如此处显式设置了skip属性，则命令行参数无效 -->
+                    <!--<skip>false</skip>-->
+
+                    <!--若项目打包类型为pom,是否取消构建;默认值:true;-->
+                    <!--<skipPoms>true</skipPoms>-->
+
+                    <!-- 是否允许通过maven命令行参数设置跳过插件的执行；默认值:false -->
+                    <!-- 在properties中设置maven.gitcommitId.skip属性可修改skipViaCommandLine默认值 -->
+                    <!--<skipViaCommandLine>false</skipViaCommandLine>-->
+
+                    <!-- 是否使用系统原生git工具获取git信息；默认值:false 使用插件内置Jgit实现 -->
+                    <!-- true：原生git工具一般速度较快，但需要系统安装git工具 -->
+                    <!--<useNativeGit>true</useNativeGit>-->
+
+                    <!-- 构建过程中,是否打印更多详细信息;默认值:false -->
+                    <!-- true：要求使用插件内置Jgit工具，否则本参数无效 -->
+                    <verbose>true</verbose>
+
+                    <!-- 属性校验设置 -->
+                    <validationProperties>
+                        <validationProperty>
+                            <!-- 校验规则名称，自定义 -->
+                            <!--<name>validating.project.version</name>-->
+                            <!-- 指定需要校验的字段 -->
+                            <!--<value>${project.version}</value>-->
+                            <!-- 指定校验规则：字段对应的值是否匹配给出的正则表达式 -->
+                            <!-- 不以-SNAPSHOT结尾 -->
+                            <!--<shouldMatchTo><![CDATA[^.*(?<!-SNAPSHOT)$]]></shouldMatchTo>-->
+                            <!-- 以-SNAPSHOT结尾 -->
+                            <shouldMatchTo><![CDATA[^.*(?<=-SNAPSHOT)$]]></shouldMatchTo>
+                        </validationProperty>
+                    </validationProperties>
+                    <!-- 属性校验时，如发现值不匹配，校验是否失败；默认值:true -->
+                    <validationShouldFailIfNoMatch>true</validationShouldFailIfNoMatch>
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
