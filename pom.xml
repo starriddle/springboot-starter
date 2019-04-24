@@ -17,6 +17,7 @@
         <module>cache</module>
         <module>feign</module>
         <module>admin</module>
+        <module>schedule</module>
     </modules>
 
 </project>
